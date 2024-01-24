@@ -1,0 +1,24 @@
+<div>
+  <table class='styled-table' id='tableproducts'>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each product}}
+        <tr id={{this.id}}>
+          <td>{{this.id}}</td>
+          <td>{{this.title}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.price}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<script src='socket.io/socket.io.js'></script>
+<script src='/js/realtimeproducts.js'></script>

@@ -1,0 +1,21 @@
+<div>
+  <table class='styled-table'>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    {{#each product}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.price}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
+<script src='/js/index.js'></script>
