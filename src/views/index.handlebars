@@ -5,7 +5,9 @@
       <th>Id</th>
       <th>Title</th>
       <th>Description</th>
+      <th>Code</th>
       <th>Price</th>
+      <th>Category</th>
     </tr>
     </thead>
     {{#each product}}
@@ -13,7 +15,9 @@
         <td>{{this.id}}</td>
         <td>{{this.name}}</td>
         <td>{{this.description}}</td>
+        <td>{{this.code}}</td>
         <td>{{this.price}}</td>
+        <td>{{this.category}}</td>
       </tr>
     {{/each}}
   </table>

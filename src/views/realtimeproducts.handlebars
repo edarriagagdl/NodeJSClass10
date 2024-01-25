@@ -1,11 +1,13 @@
-<div>
+<div class='listProducts'>
   <table class='styled-table' id='tableproducts'>
     <thead>
       <tr>
         <th>Id</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Code</th>
         <th>Price</th>
+        <th>Category</th>
       </tr>
     </thead>
     <tbody>
@@ -14,11 +16,37 @@
           <td>{{this.id}}</td>
           <td>{{this.title}}</td>
           <td>{{this.description}}</td>
+          <td>{{this.code}}</td>
           <td>{{this.price}}</td>
+          <td>{{this.category}}</td>
         </tr>
       {{/each}}
     </tbody>
   </table>
 </div>
+<div class='addProducts'>
+  <form id='newproduct'>
+    <h1>Add a Product</h1>
+    <label for='code'>Code:</label><br />
+    <input id='code' type='text' name='code' value='123' /><br />
+    <label for='title'>Title:</label><br />
+    <input id='title' type='text' name='title' />
+    <br />
+    <label for='description'>Description:</label><br />
+    <textarea name='description' id='description' rows='2'></textarea>
+    <br />
+    <label for='price'>Price:</label><br />
+    <input id='price' type='text' name='price' />
+    <br />
+    <label for='stock'>Stock:</label><br />
+    <input id='stock' type='text' name='stock' />
+    <br />
+    <label for='category'>Category:</label><br />
+    <input id='category' type='text' name='category' />
+    <br />
+    <button>Send</button>
+  </form>
+</div>
+<div id='response-message'></div>
 <script src='socket.io/socket.io.js'></script>
 <script src='/js/realtimeproducts.js'></script>

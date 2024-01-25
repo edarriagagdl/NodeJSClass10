@@ -15,7 +15,7 @@ const io = new Server(httpServer);
 app.engine('handlebars', handlebars.engine());
 
 //Middlewares
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //app.use(express.urlencoded({ extended: true }));
 //Routers

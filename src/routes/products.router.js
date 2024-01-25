@@ -93,8 +93,8 @@ router.get('/:idProduct', (req, res) => {
 router.post('/', (req, res) => {
   try {
     let io = req.app.get('socketio');
-    console.log('io:' + io);
     let product = req.body;
+    console.log('product', product);
     product = productManager.addProduct(product);
     io.emit('server:productadded', product);
     productManager.persistProductsToFile();
