@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { productManager } from './ProductManager.js';
+import { productManager } from './product.manager.js';
 
 class CartManager {
   /** array that holds all the carts */
@@ -168,5 +168,5 @@ class CartManager {
 }
 
 // const productManager = new ProductManager('products.json');
-const cartManager = new CartManager('./src/models/shoppingCart.json');
+const cartManager = new CartManager('./src/daos/models/shoppingCart.json');
 export { cartManager };

@@ -1,0 +1,12 @@
+<div>
+  <form action='/chat' method='post'>
+    <input type='text' name='text' placeholder='Type your message...' />
+    <button type='submit'>Send</button>
+  </form>
+  <ul>
+    {{#each messages}}
+      <li>{{this.text}}</li>
+    {{/each}}
+  </ul>
+</div>
+<script src='/js/index.js'></script>

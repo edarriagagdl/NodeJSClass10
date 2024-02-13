@@ -1,11 +1,13 @@
 import express from 'express';
 const router = express.Router();
-import { productManager } from '../ProductManager.js';
+import { productManager } from '../daos/product.manager.js';
 
-productManager.loadProductsFromFile('./src/models/products.json').then(() => {
-  if (!productManager.isFileLoaded())
-    console.log('The products file could not be loaded, please try later');
-});
+productManager
+  .loadProductsFromFile('./src/daos/models/products.json')
+  .then(() => {
+    if (!productManager.isFileLoaded())
+      console.log('The products file could not be loaded, please try later');
+  });
 
 /**
  * returns the list of products:

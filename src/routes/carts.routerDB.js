@@ -1,13 +1,6 @@
 import express from 'express';
-import { cartManager } from '../daos/CartManager.js';
-
+import { cartsDAO } from '../daos/carts.dao..js';
 const router = express.Router();
-
-cartManager
-  .loadCartsFromFile('./src/daos/models/shoppingCart.json')
-  .then(() => {
-    console.log('The carts file was created or loaded');
-  });
 
 /**
  * Get the details of a specific shopping cart
@@ -17,21 +10,56 @@ cartManager
  */
 router.get('/:cid', (req, res) => {
   let cid = req.params.cid;
-  if (cid && !isNaN(cid)) {
-    let cart = cartManager.getCartById(cid);
-    if (cart != undefined) {
-      return res.send(cart);
-    } else {
-      return res.status(404).send({
-        error:
-          'The cart with id ' +
-          cid +
-          ' is not found in the shopping cart catalog',
-      });
-    }
+  if (cid && isNaN(cid)) {
+    cartsDAO.getById(cid).then((cart) => {
+      if (cart != undefined && cart !== null) {
+        console.log(cart);
+        return res.send(cart);
+      } else {
+        return res.status(404).send({
+          error:
+            'The cart with id ' +
+            cid +
+            ' is not found in the shopping cart catalog',
+        });
+      }
+    });
   } else {
     return res.status(404).send({
-      error: 'The id ' + cid + ' is invalid or not a numeric value',
+      error: 'The cart id ' + cid + ' is invalid or not a numeric value',
+    });
+  }
+});
+
+/**
+ * Add a new shopping cart
+ *  
+ * http POST call:
+ *  localhost:8080/api/carts/
+ * body:
+    {
+    "products":[
+      {"id":10, "quantity": 1}
+    ]
+    }
+ * 
+ */
+router.post('/', (req, res) => {
+  try {
+    let products = req.body;
+    console.log('products', products);
+    cartsDAO.add(products).then((cart) => {
+      res.status(201).send({
+        status: 201,
+        message: 'The cart with id: ' + cart.id + ' was added sucessfully',
+        cart,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      status: 500,
+      error: '' + err,
     });
   }
 });
@@ -60,37 +88,6 @@ router.post('/:cid/product/:pid', (req, res) => {
         error: 'The id ' + cid + ' is invalid or not a numeric value',
       });
     }
-  } catch (err) {
-    console.log(err);
-    res.status(500).send({
-      status: 500,
-      error: '' + err,
-    });
-  }
-});
-
-/**
- * Add a new shopping cart
- *  
- * http POST call:
- *  localhost:8080/api/carts/
- * body:
-    {
-    "products":[
-      {"id":10, "quantity": 1}
-    ]
-    }
- * 
- */
-router.post('/', (req, res) => {
-  try {
-    let cart = req.body;
-    cart = cartManager.createNewCart(cart);
-    cartManager.persistCartsToFile();
-    res.status(201).send({
-      status: 201,
-      message: 'The cart with id: ' + cart.id + ' was added sucessfully',
-    });
   } catch (err) {
     console.log(err);
     res.status(500).send({

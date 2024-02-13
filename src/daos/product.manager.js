@@ -6,7 +6,7 @@ class ProductManager {
   // id for the products
   #id = 0;
   // this is the default path to the products file.
-  #path = './src/models/products.json';
+  #path = './src/daos/models/products.json';
   #fileLoaded = false;
 
   constructor(pathToProductos) {
@@ -158,5 +158,5 @@ class ProductManager {
   }
 }
 
-const productManager = new ProductManager('./src/models/products.json');
+const productManager = new ProductManager('./src/daos/models/products.json');
 export { productManager };
